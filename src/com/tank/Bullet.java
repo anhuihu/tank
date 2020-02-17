@@ -1,44 +1,36 @@
 package com.tank;
 
+
+
 import java.awt.*;
 
-public class Tank {
+import static java.awt.image.ImageObserver.HEIGHT;
+import static java.awt.image.ImageObserver.WIDTH;
+
+public class Bullet {
+    private static final int SPEED = 10;
+    private static final int WIDTH= 5, HEIGHT = 5;
+
+
     private int x, y;
-    private Dir dir = Dir.DOWN;
-    final private static int SPEED = 5;
-    private boolean moving = false;
+    private Dir dir;
 
-    public boolean isMoving() {
-        return moving;
-    }
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
-    }
-
-    public Dir getDir() {
-        return dir;
-    }
-
-    public void setDir(Dir dir) {
-        this.dir = dir;
-    }
-
-    public Tank(int x, int y, Dir dir) {
-        super();
+    public Bullet(int x, int y, Dir dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
     }
 
     public void paint(Graphics g) {
-        // TODO Auto-generated method stub
-        g.fillRect(x, y, 50, 50);
+        Color c = g.getColor();
+        g.setColor(Color.RED);
+        g.fillOval(x, y, WIDTH, HEIGHT);
+        g.setColor(c);
+
         move();
     }
 
     private void move() {
-        if (!moving) return;
         switch (dir) {
             case LEFT:
                 x -= SPEED;
