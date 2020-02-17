@@ -32,28 +32,31 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        // TODO Auto-generated method stub
-        g.fillRect(x, y, 50, 50);
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
+        g.fillOval(x, y, 50, 50);
+        g.setColor(c);
+
         move();
     }
 
     private void move() {
-        if (!moving) return;
-        switch (dir) {
-            case LEFT:
-                x -= SPEED;
-                break;
-            case UP:
-                y -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
-            default:
-                break;
-        }
+            if (!moving) return;
+            switch (dir) {
+                case LEFT:
+                    x -= SPEED;
+                    break;
+                case UP:
+                    y -= SPEED;
+                    break;
+                case RIGHT:
+                    x += SPEED;
+                    break;
+                case DOWN:
+                    y += SPEED;
+                    break;
+                default:
+                    break;
+            }
     }
 }
