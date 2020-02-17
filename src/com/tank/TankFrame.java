@@ -7,7 +7,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
+    Dir dir = Dir.DOWN;
     int x = 200, y = 200;
+    final private static int SPEED = 10;
+
 
     public TankFrame() {
         setSize(800, 600);
@@ -27,9 +30,23 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        System.out.println("paint");
+//        System.out.println("paint");
         g.fillRect(x, y, 50, 50);
 //        x += 10;
+        switch (dir) {
+            case LEFT:
+                x -= SPEED;
+                break;
+            case UP:
+                y -= SPEED;
+                break;
+            case RIGHT:
+                x += SPEED;
+                break;
+            case DOWN:
+                y += SPEED;
+                break;
+        }
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -61,6 +78,7 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
+            setMainTankDir();
             System.out.println("key pressed");
 //            x += 50;
 //            repaint();
@@ -88,37 +106,23 @@ public class TankFrame extends Frame {
                     break;
                 default:
                     break;
+
             }
+            setMainTankDir();
+
+            ;
             //        @Override
 //        public void keyReleased(KeyEvent e) {
 //            System.out.println("key released");
 //        }
-//
-//        //        System.out.println("paint");
-////        g.fillRect(x, y, 50, 50);
-////        x += 50;
-////        y += 50;
-//        int key = e.getKeyCode();
-//        switch(key){}        {
-//            case KeyEvent.VK_LEFT:
-//                //                    x -= 10;
-//                bL = true;
-//                break;
-//            case KeyEvent.VK_UP:
-//                //                    y -= 10;
-//                bU = true;
-//                break;
-//            case KeyEvent.VK_RIGHT:
-//                //                    x += 10;
-//                bR = true;
-//                break;
-//            case KeyEvent.VK_DOWN:
-//                //                    y += 10;
-//                bD = true;
-//                break;
-//            default:
-//                break;
-//        }
+
+        }
+
+        private void setMainTankDir() {
+            if (bL) dir = Dir.LEFT;
+            if (bU) dir = Dir.UP;
+            if (bR) dir = Dir.RIGHT;
+            if (bD) dir = Dir.DOWN;
         }
     }
 }
