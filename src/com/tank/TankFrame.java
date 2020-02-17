@@ -30,32 +30,33 @@ public class TankFrame extends Frame {
         System.out.println("paint");
         g.fillRect(x, y, 50, 50);
 //        x += 10;
-        }
+    }
+
     class MyKeyListener extends KeyAdapter {
-//        boolean bL = false;
-//        boolean bU = false;
-//        boolean bR = false;
-//        boolean bD = false;
+        boolean bL = false;
+        boolean bU = false;
+        boolean bR = false;
+        boolean bD = false;
 
         @Override
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
             switch (key) {
                 case KeyEvent.VK_LEFT:
-                    x -= 10;
-//                    bL = true;
+//                    x -= 10;
+                    bL = true;
                     break;
                 case KeyEvent.VK_UP:
-                    y -= 10;
-//                    bU = true;
+//                    y -= 10;
+                    bU = true;
                     break;
                 case KeyEvent.VK_RIGHT:
-                    x += 10;
-//                    bR = true;
+//                    x += 10;
+                    bR = true;
                     break;
                 case KeyEvent.VK_DOWN:
-                    y += 10;
-//                    bD = true;
+//                    y += 10;
+                    bD = true;
                     break;
                 default:
                     break;
@@ -67,11 +68,56 @@ public class TankFrame extends Frame {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            System.out.println("key released");
+            int key = e.getKeyCode();
+            switch (key) {
+                case KeyEvent.VK_LEFT:
+//                    x -= 10;
+                    bL = false;
+                    break;
+                case KeyEvent.VK_UP:
+//                    y -= 10;
+                    bU = false;
+                    break;
+                case KeyEvent.VK_RIGHT:
+//                    x += 10;
+                    bR = false;
+                    break;
+                case KeyEvent.VK_DOWN:
+//                    y += 10;
+                    bD = false;
+                    break;
+                default:
+                    break;
         }
-//        System.out.println("paint");
-//        g.fillRect(x, y, 50, 50);
-//        x += 50;
-//        y += 50;
+        //        @Override
+//        public void keyReleased(KeyEvent e) {
+//            System.out.println("key released");
+//        }
+//
+//        //        System.out.println("paint");
+////        g.fillRect(x, y, 50, 50);
+////        x += 50;
+////        y += 50;
+//        int key = e.getKeyCode();
+//        switch(key){}        {
+//            case KeyEvent.VK_LEFT:
+//                //                    x -= 10;
+//                bL = true;
+//                break;
+//            case KeyEvent.VK_UP:
+//                //                    y -= 10;
+//                bU = true;
+//                break;
+//            case KeyEvent.VK_RIGHT:
+//                //                    x += 10;
+//                bR = true;
+//                break;
+//            case KeyEvent.VK_DOWN:
+//                //                    y += 10;
+//                bD = true;
+//                break;
+//            default:
+//                break;
+//        }
     }
 }
