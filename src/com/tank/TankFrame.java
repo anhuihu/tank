@@ -88,8 +88,8 @@ public class TankFrame extends Frame {
                     break;
                 default:
                     break;
-        }
-        //        @Override
+            }
+            //        @Override
 //        public void keyReleased(KeyEvent e) {
 //            System.out.println("key released");
 //        }
@@ -119,5 +119,6 @@ public class TankFrame extends Frame {
 //            default:
 //                break;
 //        }
+        }
     }
 }
