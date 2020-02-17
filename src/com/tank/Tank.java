@@ -1,14 +1,17 @@
 package com.tank;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 
 public class Tank {
     private int x, y;
     private Dir dir = Dir.DOWN;
-    final private static int SPEED = 5;
+    private static final int SPEED = 5;
+
     private boolean moving = false;
 
     private TankFrame tf = null;
+
 
     public boolean isMoving() {
         return moving;
@@ -26,32 +29,29 @@ public class Tank {
         this.dir = dir;
     }
 
-    public Tank(int x, int y, Dir dir, TankFrame tf) {
 
+    public Tank(int x, int y, Dir dir, TankFrame tf) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tf = tf;
-
     }
 
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.YELLOW);
-        g.fillOval(x, y, 50, 50);
+        g.fillRect(x, y, 50, 50);
         g.setColor(c);
 
         move();
-    }
 
-    public void fire() {
-        tf.bullet = new Bullet(this.x, this.y, this.dir);
 
     }
 
     private void move() {
-        if (!moving) return;
+        if(!moving) return ;
+
         switch (dir) {
             case LEFT:
                 x -= SPEED;
@@ -65,8 +65,13 @@ public class Tank {
             case DOWN:
                 y += SPEED;
                 break;
-            default:
-                break;
         }
     }
+
+    public void fire() {
+        tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
+    }
+
+
+
 }
