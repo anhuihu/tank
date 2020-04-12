@@ -7,6 +7,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -41,7 +42,7 @@ public class TankFrame extends Frame {
         }
         Graphics gOffscreen = offScreenImage.getGraphics();
         Color c = gOffscreen.getColor();
-        gOffscreen.setColor(Color.GREEN);
+        gOffscreen.setColor(Color.black);
         gOffscreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
         gOffscreen.setColor(c);
         paint(gOffscreen);
@@ -50,6 +51,9 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
+
+
+
         MyTank.paint(g);
 //        bullet.paint(g)
         Color c = g.getColor();
@@ -57,11 +61,21 @@ public class TankFrame extends Frame {
         g.drawString("子弹的数量:" + bullets.size(), 10, 60);
         g.setColor(c);
         MyTank.paint(g);
+// 此种方式有bug，在循环列表的时候减去了它的值会报错，iterator迭代的时候不允许其他方式的删除，只允许iterator自身进行删除
+//        for (Bullet b : bullets) {
+//            b.paint(g);
+//        }
+//        for (Iterator<Bullet> it = bullets.iterator(); it.hasNext(); ) {
+//            Bullet b = it.next();
+//            if (!b.live) it.remove();
+//
+//        }
+
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
         }
     }
-
+//
 
 
     class MyKeyListener extends KeyAdapter {

@@ -50,7 +50,7 @@ public class Tank {
     }
 
     private void move() {
-        if(!moving) return ;
+        if (!moving) return;
 
         switch (dir) {
             case LEFT:
@@ -68,10 +68,11 @@ public class Tank {
         }
     }
 
+    // 添加开火的方法，传入子弹的实体
     public void fire() {
+
         tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
     }
-
 
 
 }
