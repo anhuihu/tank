@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class ResourceMgr {
-    public final static BufferedImage tankL, tankU, tankR, tankD;
+    public  static BufferedImage tankL, tankU, tankR, tankD;
 
     static {
 
