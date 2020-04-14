@@ -12,7 +12,7 @@ public class Tank {
     private boolean moving = false;
 
     private TankFrame tf = null;
-
+    private boolean living = true;
 
     public boolean isMoving() {
         return moving;
@@ -40,6 +40,7 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        if (!living) tf.tanks.remove(this);
         Color c = g.getColor();
 //        g.setColor(Color.YELLOW);
 //        g.fillRect(x, y, 50, 50);
@@ -83,6 +84,22 @@ public class Tank {
         }
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     // 添加开火的方法，传入子弹的实体
     public void fire() {
         // 修改计算子弹的位置
@@ -93,4 +110,7 @@ public class Tank {
     }
 
 
+    public void die() {
+        this.living = false;
+    }
 }

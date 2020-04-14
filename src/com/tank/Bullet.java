@@ -17,7 +17,7 @@ public class Bullet {
     // bullet direction
     private Dir dir;
     // 为了解决bullet的list无限增加的问题，给子弹类添加一个live属性，用于判断是否需要将其从list remove
-    private boolean live = true;
+    private boolean living = true;
     // bullet 构造方法 structure
     TankFrame tf = null;
     public Bullet(int x, int y, Dir dir, TankFrame tf) {
@@ -30,7 +30,7 @@ public class Bullet {
 
     public void paint(Graphics g) {
         // bullet 绘制前判断bullet的live属性
-        if (!live) {
+        if (!living) {
             tf.bullets.remove(this);
         }
 
@@ -76,7 +76,23 @@ public class Bullet {
                 break;
         }
         // 判断子弹的位置是否移出了定义的游戏窗口，如果移除窗口，将其设置为false
-        if (x<0||y<0||x>TankFrame.GAME_WIDTH||y>TankFrame.GAME_HEIGHT) live = false;
+        if (x<0||y<0||x>TankFrame.GAME_WIDTH||y>TankFrame.GAME_HEIGHT) living = false;
+
 
     }
+    public void collideWith(Tank tank){
+        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), tank.WIDTH, tank. HEIGHT);
+        if (rect1.intersects(rect2)) {
+            tank.die();
+            this.die();
+        }
+
+    }
+
+    private void die() {
+        this.living = false;
+    }
+
+    ;
 }
