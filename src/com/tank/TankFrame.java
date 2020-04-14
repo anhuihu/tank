@@ -13,8 +13,9 @@ import java.util.List;
 
 public class TankFrame extends Frame {
 
-    Tank MyTank = new Tank(200, 200, Dir.DOWN,this);
+    Tank MyTank = new Tank(400, 400, Dir.DOWN,this);
     List<Bullet> bullets = new ArrayList<>();
+    List<Tank>   tanks = new ArrayList<>();
 //    Bullet bullet = new Bullet(300, 300, Dir.DOWN, tf););
     static final int GAME_WIDTH=800, GAME_HEIGHT = 600;
     public TankFrame() {
@@ -54,13 +55,13 @@ public class TankFrame extends Frame {
 
 
 
-        MyTank.paint(g);
+
 //        bullet.paint(g)
-        Color c = g.getColor();
-        g.setColor(Color.WHITE);
+//        Color c = g.getColor();
+//        g.setColor(Color.WHITE);
         g.drawString("子弹的数量:" + bullets.size(), 10, 60);
-        g.setColor(c);
-        MyTank.paint(g);
+//        g.setColor(c);
+
 // 此种方式有bug，在循环列表的时候减去了它的值会报错，iterator迭代的时候不允许其他方式的删除，只允许iterator自身进行删除
 //        for (Bullet b : bullets) {
 //            b.paint(g);
@@ -70,9 +71,12 @@ public class TankFrame extends Frame {
 //            if (!b.live) it.remove();
 //
 //        }
-
+        MyTank.paint(g);
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
+        }
+        for (int i = 0; i < tanks.size(); i++) {
+            tanks.get(i).paint(g);
         }
     }
 //

@@ -7,7 +7,8 @@ public class Tank {
     private int x, y;
     private Dir dir = Dir.DOWN;
     private static final int SPEED = 5;
-
+    public static int WIDTH = ResourceMgr.tankD.getWidth();
+    public static int HEIGHT = ResourceMgr.tankD.getHeight();
     private boolean moving = false;
 
     private TankFrame tf = null;
@@ -57,8 +58,6 @@ public class Tank {
             case DOWN:
                 g.drawImage(ResourceMgr.tankD, x, y, null);
                 break;
-
-
         }
         move();
 
@@ -86,8 +85,11 @@ public class Tank {
 
     // 添加开火的方法，传入子弹的实体
     public void fire() {
-
-        tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
+        // 修改计算子弹的位置
+//        tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
+        int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH;
+        int bY = this.y + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+        tf.bullets.add(new Bullet(bX, bY, this.dir, this.tf));
     }
 
 

@@ -10,8 +10,8 @@ public class Bullet {
     // bullet speed
     private static final int SPEED = 5;
     // bullet size
-    private static final int WIDTH= 30,HEIGHT = 30;
-
+    public static int WIDTH = ResourceMgr.bulletD.getWidth();
+    public static int HEIGHT = ResourceMgr.bulletD.getHeight();
     // bullet location
     private int x, y;
     // bullet direction
@@ -37,10 +37,24 @@ public class Bullet {
         Color c = g.getColor();
 
         // bullet color
-        g.setColor(Color.RED);
-        g.fillOval(x, y, WIDTH, HEIGHT);
-        g.setColor(c);
+//        g.setColor(Color.RED);
+//        g.fillOval(x, y, WIDTH, HEIGHT);
+//        g.setColor(c);
+        switch (dir) {
+            case LEFT:
+                g.drawImage(ResourceMgr.bulletL, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.bulletR,x, y, null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.bulletU, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.bulletD, x, y, null);
+                break;
 
+        }
         move();
     }
 
