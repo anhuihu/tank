@@ -1,6 +1,8 @@
 package com.tank;
 
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.awt.*;
 
 
@@ -8,8 +10,9 @@ public class Bullet {
     // bullet speed
     private static final int SPEED = 5;
     // bullet size
-    public static int WIDTH = ResourceMgr.bulletD.getWidth();
-    public static int HEIGHT = ResourceMgr.bulletD.getHeight();
+    public static int WIDTH = ResourceMgr.bulletU.getWidth();
+    public static int HEIGHT = ResourceMgr.bulletU.getHeight();
+
     // bullet location
     private int x, y;
     // bullet direction
@@ -98,8 +101,10 @@ public class Bullet {
         if (rect1.intersects(rect2)) {
             tank.die();
             this.die();
+            int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+            int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
 //            ResourceMgr.explodes.add(new Explode(x, y, tf));
-            tf.explodes.add(new Explode(x, y, tf));
+            tf.explodes.add(new Explode(eX, eY, tf));
         }
 
     }
