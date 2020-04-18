@@ -12,7 +12,7 @@ public class Tank {
     private static final int SPEED = 5;
     public static int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankD.getHeight();
-    private boolean moving = false;
+    private boolean moving = true;
     private Random random = new Random();
     private Group group = Group.BAD;
 
@@ -105,8 +105,8 @@ public class Tank {
 
 
 
-        if (this.group == Group.BAD && random.nextInt(10) > 5) this.fire();
-        if (this.group == Group.BAD && random.nextInt(10) > 5) randomDir();
+        if (this.group == Group.BAD && random.nextInt(100) > 95) this.fire();
+        if (this.group == Group.BAD && random.nextInt(100) > 95) randomDir();
         boundsCheck();
         // update rect
         rect.x = this.x;
