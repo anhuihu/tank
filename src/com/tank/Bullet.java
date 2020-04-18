@@ -1,8 +1,6 @@
 package com.tank;
 
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.awt.*;
 
 
@@ -17,7 +15,7 @@ public class Bullet {
     private int x, y;
     // bullet direction
     private Dir dir;
-    private Group group = Group.BED;
+    private Group group = Group.BAD;
     // 为了解决bullet的list无限增加的问题，给子弹类添加一个live属性，用于判断是否需要将其从list remove
     private boolean living = true;
     // bullet 构造方法 structure

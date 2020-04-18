@@ -1,5 +1,7 @@
 package com.tank;
 
+import junit.extensions.TestSetup;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
@@ -12,7 +14,7 @@ public class Tank {
     public static int HEIGHT = ResourceMgr.goodTankD.getHeight();
     private boolean moving = false;
     private Random random = new Random();
-    private Group group = Group.BED;
+    private Group group = Group.BAD;
 
     private TankFrame tf = null;
     private boolean living = true;
@@ -60,16 +62,16 @@ public class Tank {
         //
         switch (dir) {
             case LEFT:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL:ResourceMgr.badTankL, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankR:ResourceMgr.badTankR, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.badTankR, x, y, null);
                 break;
             case UP:
-                g.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankU:ResourceMgr.badTankU, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankD:ResourceMgr.badTankD, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.badTankD, x, y, null);
                 break;
         }
         move();
@@ -94,8 +96,20 @@ public class Tank {
                 y += SPEED;
                 break;
         }
-        if (random.nextInt(10) > 5) this.fire();
+        if (this.group == Group.BAD && random.nextInt(10) > 5) this.fire();
+        if (this.group == Group.BAD && random.nextInt(10) > 5) randomDir();
+        boundsCheck();
+    }
 
+    private void boundsCheck() {
+        if (this.x < 0) x = 0;
+        if (this.y < 30) y = 30;
+        if (this.x>TankFrame.GAME_WIDTH - Tank.WIDTH) x = TankFrame.GAME_WIDTH-Tank.WIDTH;
+        if(this.y>TankFrame.GAME_HEIGHT - Tank.HEIGHT) y = TankFrame.GAME_HEIGHT-Tank.HEIGHT;
+    }
+
+    private void randomDir() {
+        this.dir = Dir.values()[random.nextInt(4)];
     }
 
     public int getX() {
@@ -118,7 +132,7 @@ public class Tank {
     public void fire() {
         // 修改计算子弹的位置
 //        tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
-        int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH/2;
+        int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int bY = this.y + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
     }

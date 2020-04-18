@@ -1,5 +1,5 @@
 package com.tank;
 
 public enum Group {
-    GOOD,BED
+    GOOD, BAD
 }
