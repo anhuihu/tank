@@ -1,9 +1,9 @@
 package com.tank;
 
 import junit.extensions.TestSetup;
+import org.w3c.dom.css.Rect;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.util.Random;
 
 public class Tank {
@@ -19,6 +19,7 @@ public class Tank {
     private TankFrame tf = null;
     private boolean living = true;
 
+    Rectangle rect = new Rectangle();
     public boolean isMoving() {
         return moving;
     }
@@ -50,6 +51,11 @@ public class Tank {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.height = HEIGHT;
+        rect.width = WIDTH;
     }
 
     public void paint(Graphics g) {
@@ -96,9 +102,15 @@ public class Tank {
                 y += SPEED;
                 break;
         }
+
+
+
         if (this.group == Group.BAD && random.nextInt(10) > 5) this.fire();
         if (this.group == Group.BAD && random.nextInt(10) > 5) randomDir();
         boundsCheck();
+        // update rect
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     private void boundsCheck() {
