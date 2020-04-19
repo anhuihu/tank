@@ -5,9 +5,10 @@ import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.util.Random;
+import java.util.concurrent.ForkJoinPool;
 
 public class Tank {
-    private int x, y;
+    int x, y;
     private Dir dir = Dir.DOWN;
     private static final int SPEED = 5;
     public static int WIDTH = ResourceMgr.goodTankD.getWidth();
@@ -15,6 +16,19 @@ public class Tank {
     private boolean moving = true;
     private Random random = new Random();
     private Group group = Group.BAD;
+
+
+    //    FireStrategy fs = new DefaultFireStrategy();
+    FireStrategy fs;
+
+
+    public TankFrame getTf() {
+        return tf;
+    }
+
+    public void setTf(TankFrame tf) {
+        this.tf = tf;
+    }
 
     private TankFrame tf = null;
     private boolean living = true;
@@ -56,6 +70,11 @@ public class Tank {
         rect.y = this.y;
         rect.height = HEIGHT;
         rect.width = WIDTH;
+        if (group == Group.GOOD) {
+            fs = new FourDirFireStrategy();
+        } else {
+        }
+            fs = new DefaultFireStrategy();
     }
 
     public void paint(Graphics g) {
@@ -142,11 +161,12 @@ public class Tank {
 
     // 添加开火的方法，传入子弹的实体
     public void fire() {
-        // 修改计算子弹的位置
-//        tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
-        int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        int bY = this.y + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
+//        // 修改计算子弹的位置
+////        tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
+//        int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+//        int bY = this.y + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+//        tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));t
+        fs.fire(this);
     }
 
 
