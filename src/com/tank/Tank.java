@@ -4,6 +4,7 @@ import junit.extensions.TestSetup;
 import org.w3c.dom.css.Rect;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 
@@ -70,6 +71,12 @@ public class Tank {
         rect.y = this.y;
         rect.height = HEIGHT;
         rect.width = WIDTH;
+        String goodFs = (String) PropertyMgr.get("goodFS");
+        try {
+            Class.forName(goodFs).getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (group == Group.GOOD) {
             fs = new FourDirFireStrategy();
         } else {
